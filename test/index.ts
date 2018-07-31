@@ -92,7 +92,7 @@ function makeTmpRepo(name: string): Repo {
   let repoPath = path.join(tmpDir.name, name);
   let repo: Repo = {
     name,
-    url: new URL(`file://${repoPath}`).href,
+    url: toFileURI(repoPath),
     path(...paths: string[]) {
       return path.join(repoPath, ...paths);
     },
@@ -125,9 +125,25 @@ function writeTag(repo: Repo, sha: string, tag: string) {
 
 function copyFixturePack(repo: Repo, sha: string) {
   fs.readdirSync(path.join("test/fixtures", sha)).forEach(packfile => {
-    fs.copyFileSync(
+    copyFile(
       path.join("test/fixtures", sha, packfile),
       repo.path(".git/objects/pack", packfile)
     );
   });
+}
+
+function toFileURI(file: string) {
+  let resolved = path.resolve(file).replace(/\\/g, "/");
+  if (resolved[0] !== "/") {
+    resolved = "/" + resolved;
+  }
+  return `file://${resolved}`;
+}
+
+function copyFile(src: string, dest: string) {
+  if (fs.copyFileSync) {
+    fs.copyFileSync(src, dest);
+  } else {
+    fs.writeFileSync(dest, fs.readFileSync(src));
+  }
 }
