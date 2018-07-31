@@ -1,0 +1,32 @@
+{
+  "name": "git-sparse-checkout",
+  "version": "0.1.0",
+  "description": "Sparsely checkout single tag from a remote repo url",
+  "keywords": [
+    "fetch",
+    "git",
+    "sparse"
+  ],
+  "repository": "github:krisselden/git-sparse-checkout",
+  "license": "BSD-2-Clause",
+  "author": "Kris Selden <kris.selden@gmail.com>",
+  "files": [
+    "dist",
+    "!dist/test",
+    "index.ts"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "tsc",
+    "test": "tsc && qunit dist/test/*.js"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.4",
+    "@types/qunit": "^2.5.1",
+    "@types/tmp": "^0.0.33",
+    "qunit": "^2.6.1",
+    "tmp": "^0.0.33",
+    "typescript": "^3.0.1"
+  }
+}

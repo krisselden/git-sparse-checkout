@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "strict": true,
+    "declaration": true,
+    "sourceMap": true
+  },
+  "files": ["index.ts", "test/index.ts"]
+}
